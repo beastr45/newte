@@ -8,6 +8,8 @@
 #include <termios.h>
 #include <unistd.h>
 
+#include "utils.h"
+
 /*** defines ***/
 
 #define CTRL_KEY(k) ((k)&0x1f)
@@ -24,14 +26,6 @@ struct editorConfig Editor;
 // endblk
 
 /*** terminal ***/
-
-void die(const char *s) {
-  write(STDOUT_FILENO, "\x1b[2J", 4);
-  write(STDOUT_FILENO, "\x1b[H", 3);
-
-  perror(s);
-  exit(1);
-}
 
 void disableRawMode() {
   if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &Editor.orig_termios) == -1)
