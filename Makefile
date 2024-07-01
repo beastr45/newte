@@ -2,6 +2,10 @@
 # https://makefiletutorial.com/
 LDFLAGS := 
 
+#swap out these two based on needs
+DBGCFLAGS = -g -O0 -DDEBUG
+RELCFLAGS = -O3 -DNDEBUG
+
 TARGET_EXEC := nte-DebugBear
 
 BUILD_DIR := ./build
@@ -26,7 +30,7 @@ INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
 # The -MMD and -MP flags together generate Makefiles for us!
 # These files will have .d instead of .o as the output.
-CPPFLAGS := $(INC_FLAGS) -MMD -MP
+CPPFLAGS := $(INC_FLAGS) -MMD -MP $(DBGCFLAGS)
 
 # The final build step. change linker to mold
 $(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)

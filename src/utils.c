@@ -5,6 +5,7 @@
 #include "utils.h"
 
 void die(const char *s) {
+      //refresh screen on exit
   write(STDOUT_FILENO, "\x1b[2j", 4);
   write(STDOUT_FILENO, "\x1b[h", 3);
 
